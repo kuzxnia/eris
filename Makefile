@@ -2,6 +2,9 @@
 runserver:
 	air --build.cmd "go build -o bin/api main.go" --build.bin "./bin/api"
 
+test:
+	gotestsum ./...
+
 lint:
 	golangci-lint run
 

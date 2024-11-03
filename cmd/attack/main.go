@@ -1,18 +1,27 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
+	"github.com/kuzxnia/eris/internal/interfaces/cli"
 	"github.com/kuzxnia/eris/pkg/attack"
 	"go.uber.org/fx"
 )
 
 func main() {
 	// setup configuration
-	fx.New(
+	app := fx.New(
 		attack.Module,
-		fx.Invoke(func(registry *attack.AttackRegistry) {
-			fmt.Println("hello")
-		}),
-	).Run()
+		cli.Module,
+	)
+
+	if err := app.Start(context.Background()); err != nil {
+		fmt.Println("[Fx] START FAILED\t" + err.Error())
+		return
+	}
+	if err := app.Stop(context.Background()); err != nil {
+		fmt.Println("[Fx] STOP FAILED\t" + err.Error())
+		return
+	}
 }
