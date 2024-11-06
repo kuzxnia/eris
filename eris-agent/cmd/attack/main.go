@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/kuzxnia/eris/internal/interfaces/cli"
-	"github.com/kuzxnia/eris/pkg/attack"
+	"github.com/kuzxnia/eris/eris-agent/internal/interfaces/cli"
+	"github.com/kuzxnia/eris/eris-agent/pkg/attack"
 	"go.uber.org/fx"
 )
 

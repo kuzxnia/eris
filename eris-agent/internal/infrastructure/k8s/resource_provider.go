@@ -29,7 +29,6 @@ func (p *CompositeResourceProvider) RunOnContainer(pod Pod, container string, cm
 	return nil
 }
 
-
 type Pod struct {
 	Context string
 	// todo: data or else

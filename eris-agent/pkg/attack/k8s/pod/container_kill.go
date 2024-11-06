@@ -3,7 +3,7 @@ package pod
 import (
 	"fmt"
 
-	"github.com/kuzxnia/eris/internal/infrastructure/k8s"
+	"github.com/kuzxnia/eris/eris-agent/internal/infrastructure/k8s"
 )
 
 // ContainerKillAttack is ...

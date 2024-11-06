@@ -1,8 +1,8 @@
 package attack
 
 import (
-	"github.com/kuzxnia/eris/pkg/attack/k8s/node"
-	"github.com/kuzxnia/eris/pkg/attack/k8s/pod"
+	"github.com/kuzxnia/eris/eris-agent/pkg/attack/k8s/node"
+	"github.com/kuzxnia/eris/eris-agent/pkg/attack/k8s/pod"
 	"go.uber.org/fx"
 )
 

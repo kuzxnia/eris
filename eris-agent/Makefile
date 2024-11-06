@@ -12,4 +12,4 @@ swagger:
 	swag fmt
 	swag init
 
-.PHONY: runserver lint swagger
+.PHONY: runserver lint swagger test

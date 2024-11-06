@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"github.com/kuzxnia/eris/internal/infrastructure/k8s"
-	"github.com/kuzxnia/eris/pkg/attack/k8s/pod"
+	"github.com/kuzxnia/eris/eris-agent/internal/infrastructure/k8s"
+	"github.com/kuzxnia/eris/eris-agent/pkg/attack/k8s/pod"
 	"github.com/urfave/cli/v2"
 	"go.uber.org/fx"
 )
