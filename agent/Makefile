@@ -1,0 +1,20 @@
+
+runserver:
+	air --build.cmd "go build -o bin/api main.go" --build.bin "./bin/api"
+
+test:
+	gotestsum ./...
+
+lint:
+	golangci-lint run
+
+swagger:
+	swag fmt
+	swag init
+
+gen: 
+	protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative pkg/interfaces/web/proto/*.proto
+
+
+
+.PHONY: runserver lint swagger test gen

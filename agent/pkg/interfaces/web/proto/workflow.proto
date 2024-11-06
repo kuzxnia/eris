@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "proto/";
+
+service WorkflowController {
+  rpc RunWorkflow(RunWorkflowRequest) returns (RunWorkflowResponse) {}
+  rpc StopWorkflow(StopWorkflowRequest) returns (StopWorkflowResponse) {}
+}
+
+message RunWorkflowRequest {
+  repeated ProbeSource sources = 1;
+  repeated Workflow workflows = 2;
+}
+
+message RunWorkflowResponse {}
+
+message StopWorkflowRequest {}
+
+message StopWorkflowResponse {}
+
+message ProbeSource {
+  // todo:
+}
+
+message Workflow {
+  string name = 1;
+  repeated Action actions = 2;
+}
+
+message Action {
+  // todo:
+  string name = 1;
+  string type = 2;
+  string timeout = 3;
+  Selector selector = 4;
+  Probe probe = 5;
+
+  // only for process related actions
+  optional string process_name = 6;
+  optional string container_name = 7;
+}
+
+message Probe {
+  string type = 1;
+  string mode = 2;
+  repeated string sources = 3;
+  string check = 4;
+  string frequency = 5;
+  string timeout = 6;
+  bool block_after_until_success = 7;
+  string block_timeout = 8;
+}
+
+message Selector {
+  string type = 1;
+
+  // only for label_selector type
+  optional string label = 2;
+  repeated string namespaces = 3;
+  // only for previous_action type
+  optional string action_name = 4;
+  // only for pod_name type
+  optional string target_pod = 5;
+}
