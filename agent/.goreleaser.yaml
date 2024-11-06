@@ -1,0 +1,86 @@
+---
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - id: eris-agent
+    main: ./cmd
+    binary: eris-agent
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+    goarm:
+     - "7"
+    ignore:
+      - goos: darwin
+        goarch: arm
+
+archives:
+  - id: eris-agent-archive
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- .Tag }}_
+      {{- .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- with .Arm }}v{{ . }}{{ end }}
+      {{- with .Mips }}_{{ . }}{{ end }}
+      {{- if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}
+    builds:
+      - eris-agent
+    files:
+      - LICENSE
+
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^build(\(.+\))?:'
+      - '^cd(\(.+\))?:'
+      - '^ci(\(.+\))?:'
+      - '^cicd(\(.+\))?:'
+      - '^docker(\(.+\))?:'
+      - '^docs(\(.+\))?:'
+      - '^refactor(\(.+\))?:'
+      - '^test(\(.+\))?:'
+      - Merge pull request
+      - Merge branch
+      - go mod tidy
+
+dockers:
+  - image_templates:
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-amd64
+    use: buildx
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - --platform=linux/amd64
+
+  - image_templates:
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-arm64
+    use: buildx
+    goarch: arm64
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - --platform=linux/arm64
+
+docker_manifests:
+  - name_template: docker.io/kuzxnia/eris-agent:v{{ .Tag }}
+    image_templates:
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-amd64
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-arm64
+  - name_template: docker.io/kuzxnia/eris-agent:latest
+    image_templates:
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-amd64
+      - docker.io/kuzxnia/eris-agent:v{{ .Tag }}-arm64

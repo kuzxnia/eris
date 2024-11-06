@@ -2,3 +2,4 @@ main
 bin/api
 .env
 tmp/*
+**/dist/*
