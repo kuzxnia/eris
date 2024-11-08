@@ -1,11 +1,5 @@
 package k8s
 
-type ResourceProvider interface {
-	GetResources(*ResourceSelector) ([]*Resource, error)
-	GetPods(*ResourceSelector) ([]Pod, error)
-	RunOnContainer(pod Pod, container string, cmd string) error
-}
-
 type CompositeResourceProvider struct {
 	k8sClient []*KubernetesClient
 }

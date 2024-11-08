@@ -1,0 +1,93 @@
+{
+  "contexts": {
+    "dev-context-01": {
+      "namespaces": [
+        "default"
+      ]
+    },
+    "dev-context-02": {
+      "namespaces": [
+        "default",
+        "custom"
+      ]
+    }
+  },
+  "sources": {
+    "http_check": {
+      "here_is_check_name": {
+        "url": "http://example.com/",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  },
+  "workflows": [
+    {
+      "name": "test one node failover",
+      "actions": [
+        {
+          "name": "Suspend one node process",
+          "type": "process-suspend",
+          "process_name": "/bin/my_process",
+          "container_name": "....",
+          "timeout": "1s",
+          "selector": {
+            "type": "label_selector",
+            "label": "app=my_app,v1=0",
+            "target_pod": null,
+            "contexts": {
+              "dev-context-01": {
+                "namespaces": [
+                  "default"
+                ]
+              },
+              "dev-context-01": {
+                "namespaces": [
+                  "default",
+                  "custom"
+                ]
+              }
+            },
+            "pod_affected_percentage": "20%"
+          },
+          "probe": {
+            "type": "httpProbe",
+            "mode": "edge",
+            "sources": [
+              "here_is_check_name"
+            ],
+            "check": "here_is_check_name.status_code != 200 && here_is_check_name.data | .jq \"select(rs.replilcas[].type == unhealthy)\"",
+            "frequency": "1s",
+            "timeout": "1s",
+            "error_rate": "3/10",
+            "block_after_until_success": true,
+            "block_timeout": "10s"
+          }
+        },
+        {
+          "name": "Force kill - stop process",
+          "type": "process-kill",
+          "process_name": "/bin/my_process",
+          "timeout": "1s",
+          "selector": {
+            "type": "previous_action",
+            "action_name": "Suspend one node process"
+          },
+          "probe": {
+            "type": "httpProbe",
+            "sources": [
+              "here_is_check_name"
+            ],
+            "check": "here_is_check_name.status_code != 200 && here_is_check_name.data | .jq \"select(rs.replilcas[].type == unhealthy)\"",
+            "frequency": "5s",
+            "block_until_success": true,
+            "error_rate": "3/10",
+            "block_after_until_success": true,
+            "block_timeout": "120s"
+          }
+        }
+      ]
+    }
+  ]
+}
