@@ -1,18 +1,23 @@
 package integration
 
 import (
+	"net/http"
 	"net/http/httptest"
 
 	"github.com/gofiber/fiber/v2"
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
 )
 
-func (s *TestSuite) TestHealthCheck() {
-	// given
-	req := httptest.NewRequest("GET", "/api/v1/health", nil)
+var _ = Describe("HealthCheck", func() {
+	var request *http.Request
 
-	// when
-	resp, _ := s.FiberApp.Test(req, 1)
+	BeforeEach(func() {
+		request = httptest.NewRequest("GET", "/api/v1/health", nil)
+	})
 
-	// then
-	s.Equal(fiber.StatusOK, resp.StatusCode)
-}
+	It("send request", func() {
+		response, _ := FiberApp.Test(request, 1)
+		Expect(response.StatusCode).To(Equal(fiber.StatusOK))
+	})
+})
