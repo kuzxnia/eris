@@ -1,6 +1,8 @@
 package workflow
 
-import "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+import (
+	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+)
 
 type WorkflowService struct {
 	mapper *WorkflowMapper
@@ -13,6 +15,7 @@ func ProvideWorkflowService(mapper *WorkflowMapper) *WorkflowService {
 }
 
 func (s *WorkflowService) CreateWorkflow(workflowRequest dto.WorkflowRequest) error {
+	workflow, _ := s.mapper.Map(&workflowRequest)
 	// todo: check if such chat exists
 	return nil
 }
