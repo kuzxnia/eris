@@ -59,6 +59,7 @@ var Module = fx.Options(
 	AsController(v1.ProvideHealthCheckController),
 
 	AsController(v1.ProvideWorkflowController),
+	AsController(v1.ProvideAgentController),
 
 	fx.Provide(
 		fx.Annotate(

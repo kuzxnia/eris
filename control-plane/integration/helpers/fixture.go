@@ -1,18 +1,18 @@
-package integration
+package helpers
 
 import (
 	"net/http"
 	"os"
 	"testing"
 
-	app "github.com/kuzxnia/eris/control-plane/pkg"
+	main "github.com/kuzxnia/eris/control-plane/pkg"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxtest"
 )
 
 func withApp(t *testing.T, r interface{}) {
 	app := fxtest.New(t,
-		app.Modules,
+		main.Modules,
 		// fx.Replace(mocks(t)),
 		fx.Invoke(r),
 	)
@@ -20,7 +20,7 @@ func withApp(t *testing.T, r interface{}) {
 	app.RequireStart()
 }
 
-func readFile(path string) []byte {
+func ReadFile(path string) []byte {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		panic(err)
@@ -28,7 +28,7 @@ func readFile(path string) []byte {
 	return data
 }
 
-func responseBodyAsString(response *http.Response) string {
+func ResponseBodyAsString(response *http.Response) string {
 	bodyData := make([]byte, response.ContentLength)
 	_, _ = response.Body.Read(bodyData)
 	return string(bodyData)

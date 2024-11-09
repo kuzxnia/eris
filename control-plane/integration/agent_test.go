@@ -8,10 +8,10 @@ import (
 	"github.com/kuzxnia/eris/control-plane/integration/helpers"
 )
 
-func (s *TestSuite) TestWorkflow() {
+func (s *TestSuite) TestAgent() {
 	// given
-	payload := helpers.ReadFile("data/web/workflow_v1_payload.json")
-	request := httptest.NewRequest("POST", "/api/v1/workflow", bytes.NewReader(payload))
+	payload := helpers.ReadFile("data/web/agent_v1_payload.json")
+	request := httptest.NewRequest("POST", "/api/v1/agent", bytes.NewReader(payload))
 	request.Header.Add("Content-Type", "application/json")
 
 	// when

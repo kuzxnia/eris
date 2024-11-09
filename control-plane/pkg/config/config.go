@@ -18,6 +18,7 @@ func ProvideConfig() *Config {
 	viper.AutomaticEnv()
 	viper.SetConfigName("properties")
 	viper.AddConfigPath("./pkg/config")
+	viper.AddConfigPath("./config")
 	viper.SetConfigType("yaml")
 
 	var configuration Config

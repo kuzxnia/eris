@@ -21,11 +21,12 @@ func (m *WorkflowMapper) Map(request *dto.WorkflowRequest) (*Workflow, error) {
 			Type:    action.Type,
 			Timeout: action.Timeout,
 			Selector: &Selector{
-				Type:       action.Selector.Type,
-				Label:      action.Selector.Label,
-				Namespaces: action.Selector.Namespaces,
-				ActionName: action.Selector.ActionName,
-				TargetPod:  action.Selector.TargetPod,
+				Type:                  action.Selector.Type,
+				PodAffectedPercentage: action.Selector.PodAffectedPercentage,
+				Label:                 action.Selector.Label,
+				Namespaces:            action.Selector.Namespaces,
+				ActionName:            action.Selector.ActionName,
+				TargetPod:             action.Selector.TargetPod,
 			},
 			Probe: &Probe{
 				Type:                   action.Probe.Type,

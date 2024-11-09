@@ -20,6 +20,7 @@ func (controller WorkflowController) RegisterRoutes(router fiber.Router) {
 	workflowRouter := router.Group("/workflow")
 
 	workflowRouter.Post("/", controller.createWorkflow)
+  workflowRouter.Post("/:workflow_name", controller.runWorkflow)
 }
 
 func (controller WorkflowController) createWorkflow(c *fiber.Ctx) error {
@@ -34,8 +35,23 @@ func (controller WorkflowController) createWorkflow(c *fiber.Ctx) error {
     return err
   }
 
-	return c.Status(fiber.StatusOK).JSON(dto.GeneralResponse{
+	return c.Status(fiber.StatusCreated).JSON(dto.GeneralResponse{
 		Message: "Created",
 		Data:    workflow,
+	})
+}
+
+func (controller WorkflowController) runWorkflow(c *fiber.Ctx) error {
+  workflow_name := c.Params("workflow_name")
+  
+  err := controller.service.RunWorkflow(workflow_name)
+
+  if err != nil {
+    return err
+  }
+
+	return c.Status(fiber.StatusOK).JSON(dto.GeneralResponse{
+		Message: "Ok",
+		Data:    workflow_name,
 	})
 }

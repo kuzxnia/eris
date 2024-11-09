@@ -1,6 +1,8 @@
 package app
 
 import (
+	"github.com/kuzxnia/eris/control-plane/internal/infra"
+	"github.com/kuzxnia/eris/control-plane/pkg/agent"
 	"github.com/kuzxnia/eris/control-plane/pkg/config"
 	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
@@ -8,7 +10,9 @@ import (
 )
 
 var Modules = fx.Options(
-  config.Module,
-  workflow.Module,
+	config.Module,
+	infra.Module,
+  agent.Module,
+	workflow.Module,
 	web.Module,
 )
