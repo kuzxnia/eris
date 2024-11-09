@@ -1,14 +1,10 @@
 package workflow
 
-type Workflows struct {
-	Contexts  Contexts
-	Sources   Sources
-	Workflows []Workflow
-}
-
 type Workflow struct {
-	Name    string
-	Actions []*Action
+	Name     string
+	Contexts Contexts
+	Sources  Sources
+	Actions  []*Action
 }
 
 type Contexts map[string]any

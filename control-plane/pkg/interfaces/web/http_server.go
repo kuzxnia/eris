@@ -2,18 +2,20 @@ package web
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
+	"github.com/kuzxnia/eris/control-plane/pkg/config"
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
 	httpException "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/exception"
 	v1 "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/v1"
 	"go.uber.org/fx"
 )
 
-func ProvideHttpServer(controllers []Controller, lc fx.Lifecycle) *fiber.App {
+func ProvideHttpServer(controllers []Controller, config *config.Config, lc fx.Lifecycle) *fiber.App {
 	cfg := fiber.Config{
 		ErrorHandler: httpException.ErrorHandler,
 	}
@@ -38,7 +40,7 @@ func ProvideHttpServer(controllers []Controller, lc fx.Lifecycle) *fiber.App {
 		fx.Hook{
 			OnStart: func(context.Context) error {
 				go func() {
-					err := app.Listen(":1234") //  cfg.Get("SERVER.PORT"))
+					err := app.Listen(fmt.Sprintf("0.0.0.0:%d", config.Server.Port))
 					exception.PanicLogging(err)
 				}()
 

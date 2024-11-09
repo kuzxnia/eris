@@ -1,14 +1,10 @@
 package dto
 
-type WorkflowsRequest struct {
-	Contexts  ContextsRequest   `json:"contexts"`
-	Sources   SourcesRequest    `json:"sources"`
-	Workflows []WorkflowRequest `json:"workflows"`
-}
-
 type WorkflowRequest struct {
-	Name    string           `json:"name,omitempty"`
-	Actions []*ActionRequest `json:"actions,omitempty"`
+	Name     string           `json:"name,omitempty"`
+	Actions  []*ActionRequest `json:"actions,omitempty"`
+	Contexts ContextsRequest  `json:"contexts"`
+	Sources  SourcesRequest   `json:"sources"`
 }
 
 type ContextsRequest map[string]any
