@@ -6,6 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
+	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 	"github.com/kuzxnia/eris/control-plane/tests/integration/helpers"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -30,6 +31,30 @@ var _ = Describe("Creating workflow", Label("workflow"), func() {
 			workflow, err := WorkflowRepository.GetWorkflow("test one node failover")
 			Expect(workflow).ToNot(BeNil())
 			Expect(err).To(BeNil())
+		})
+	})
+})
+
+func WorkflowSaved(ctx SpecContext) {
+	Expect(
+		WorkflowRepository.SaveWorkflow(&workflow.Workflow{Name: "test_workflow"}),
+	).To(Succeed())
+}
+
+var _ = Describe("Running workflow", Ordered, Label("workflow"), func() {
+	Context("there is workflow", func() {
+		BeforeAll(WorkflowSaved)
+
+		When("wun workflow", func() {
+			BeforeEach(func(ctx SpecContext) {
+				request := httptest.NewRequest("POST", "/api/v1/workflow/test_workflow/run", nil)
+
+				Expect(FiberApp.Test(request, 1)).To(HaveHTTPStatus(fiber.StatusOK))
+			})
+
+			It("selects resources for action", func() {})
+
+			It("sends run action to agents for execution on selects resources", func() {})
 		})
 	})
 })

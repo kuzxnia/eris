@@ -20,7 +20,7 @@ var _ = Describe("Creating workflow", Label("workflow"), func() {
 
 		workflowRepository = mocks.NewMockWorkflowRepository(mockCtrl)
 		workflowService = workflow.ProvideWorkflowService(
-			nil, &workflow.WorkflowMapper{}, workflowRepository,
+			&workflow.WorkflowMapper{}, workflowRepository,
 		)
 	})
 

@@ -20,7 +20,7 @@ func (controller WorkflowController) RegisterRoutes(router fiber.Router) {
 	workflowRouter := router.Group("/workflow")
 
 	workflowRouter.Post("/", controller.createWorkflow)
-  workflowRouter.Post("/:workflow_name", controller.runWorkflow)
+  workflowRouter.Post("/:workflow_name/run", controller.runWorkflow)
 }
 
 func (controller WorkflowController) createWorkflow(c *fiber.Ctx) error {

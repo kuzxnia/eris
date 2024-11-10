@@ -14,7 +14,7 @@ type WorkflowService struct {
 }
 
 func ProvideWorkflowService(
-	agentService *agent.AgentService,
+	// agentService *agent.AgentService,
 	mapper *WorkflowMapper,
 	repository WorkflowRepository,
 ) *WorkflowService {
@@ -34,22 +34,7 @@ func (s *WorkflowService) RunWorkflow(workflow_name string) error {
 	if err != nil {
 		return err
 	}
-	agents, err := s.agentService.GetAgents()
-	if err != nil {
-		return err
-	}
-
-  // wyciagamy zasoby, przez agentow
-  // liste poddów / typ zasobu z selektora
-
-
-  // kozystajac z pod 
-  // workflow.Actions[0].Selector.PodAffectedPercentage
-  // selekcjonuje liste zasobow do zaatakowania
-
-  // wysylam do agentow polecenia wykonania akcji
-
 	//
-	fmt.Println(workflow, agents)
+	fmt.Println(workflow)
 	return nil
 }
