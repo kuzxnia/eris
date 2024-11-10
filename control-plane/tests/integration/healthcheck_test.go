@@ -16,8 +16,8 @@ var _ = Describe("HealthCheck", func() {
 		request = httptest.NewRequest("GET", "/api/v1/health", nil)
 	})
 
-	It("send request", func() {
+	It("sends response with 200 status code", func() {
 		response, _ := FiberApp.Test(request, 1)
-		Expect(response.StatusCode).To(Equal(fiber.StatusOK))
+		Expect(response).To(HaveHTTPStatus(fiber.StatusOK))
 	})
 })

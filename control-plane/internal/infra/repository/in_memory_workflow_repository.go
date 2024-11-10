@@ -1,8 +1,7 @@
 package repository
 
 import (
-	"errors"
-
+	"github.com/kuzxnia/eris/control-plane/pkg/exception"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 )
 
@@ -19,7 +18,7 @@ func ProvideInMemoryWorkflowRepository() *InMemoryWorkflowRepository {
 func (r *InMemoryWorkflowRepository) SaveWorkflow(workflow *workflow.Workflow) error {
 	_, isPresent := r.workflows[workflow.Name]
 	if isPresent {
-		return errors.New("Workflow already exists")
+		return exception.ResourceAlreadyExistsError{}
 	}
 
 	r.workflows[workflow.Name] = workflow
@@ -28,8 +27,8 @@ func (r *InMemoryWorkflowRepository) SaveWorkflow(workflow *workflow.Workflow) e
 
 func (r *InMemoryWorkflowRepository) GetWorkflow(workflowName string) (*workflow.Workflow, error) {
 	workflow, isPresent := r.workflows[workflowName]
-	if isPresent {
-		return nil, errors.New("Workflow not found")
+	if !isPresent {
+		return nil, exception.NotFoundError{}
 	}
 
 	return workflow, nil

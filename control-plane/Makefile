@@ -3,10 +3,10 @@ runserver:
 	air --build.cmd "go build -o bin/api main.go" --build.bin "./bin/api"
 
 unittest:
-	ginkgo run ./tests/
+	ginkgo run ./tests/unit/
 
 itgtest:
-	ginkgo run ./integration/
+	ginkgo run -v ./tests/integration/
 
 lint:
 	golangci-lint run

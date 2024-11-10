@@ -38,6 +38,14 @@ func ErrorHandler(ctx *fiber.Ctx, err error) error {
 		})
 	}
 
+	_, alreadyExistsError := err.(exception.ResourceAlreadyExistsError)
+	if alreadyExistsError {
+		return ctx.Status(fiber.StatusConflict).JSON(dto.GeneralResponse{
+			Message: "Unauthorized",
+			Data:    err.Error(),
+		})
+	}
+
 	return ctx.Status(fiber.StatusInternalServerError).JSON(dto.GeneralResponse{
 		Message: "General Error",
 		Data:    err.Error(),

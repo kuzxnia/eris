@@ -23,3 +23,11 @@ type UnauthorizedError struct {
 func (unauthorizedError UnauthorizedError) Error() string {
 	return unauthorizedError.Message
 }
+
+type ResourceAlreadyExistsError struct {
+	Message string
+}
+
+func (ex ResourceAlreadyExistsError) Error() string {
+	return ex.Message
+}
