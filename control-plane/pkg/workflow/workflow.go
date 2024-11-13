@@ -1,7 +1,5 @@
 package workflow
 
-import "github.com/kuzxnia/eris/control-plane/pkg"
-
 type Workflow struct {
 	Name     string
 	Contexts Contexts
@@ -17,7 +15,7 @@ type Action struct {
 	Name          string
 	Type          string
 	Timeout       string
-	Selector      *pkg.Selector
+	Selector      *Selector
 	Probe         *Probe
 	ProcessName   *string
 	ContainerName *string
@@ -34,11 +32,11 @@ type Probe struct {
 	BlockTimeout           string
 }
 
-// type Selector struct {
-// 	Type                  string
-// 	PodAffectedPercentage string
-// 	Label                 *string
-// 	Namespaces            []string
-// 	ActionName            *string
-// 	TargetPod             *string
-// }
+type Selector struct {
+	Type                  string
+	PodAffectedPercentage string
+	Label                 *string
+	Namespaces            []string
+	ActionName            *string
+	TargetPod             *string
+}
