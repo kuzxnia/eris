@@ -35,8 +35,8 @@ type ProbeRequest struct {
 type SelectorRequest struct {
 	Type                  string   `json:"type,omitempty"`
 	PodAffectedPercentage string   `json:"pod_affected_percentage"`
-	Label                 *string  `json:"label,omitempty"`
+	Label                 string  `json:"label,omitempty"`
 	Namespaces            []string `json:"namespaces,omitempty"`
-	ActionName            *string  `json:"action_name,omitempty"`
-	TargetPod             *string  `json:"target_pod,omitempty"`
+	ActionName            string  `json:"action_name,omitempty"`
+	TargetPod             string  `json:"target_pod,omitempty"`
 }

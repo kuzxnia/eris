@@ -13,24 +13,28 @@ import (
 )
 
 var _ = Describe("Creating workflow", Label("workflow"), func() {
-	When("there isn't workflow with same name", func() {
+	Context("there isn't workflow with same name", func() {
 		BeforeEach(func(ctx SpecContext) {
 			_, err := WorkflowRepository.GetWorkflow("test one node failover")
 
 			Expect(err).To(MatchError(exception.NotFoundError{}))
 		})
-		It("creates workflow", func() {
-			payload := helpers.ReadFile("data/web/workflow_v1_payload.json")
-			request := httptest.NewRequest("POST", "/api/v1/workflow", bytes.NewReader(payload))
-			request.Header.Add("Content-Type", "application/json")
 
-			response, _ := FiberApp.Test(request, 1)
+		When("create workflow", func() {
+			BeforeEach(func(ctx SpecContext) {
+				payload := helpers.ReadFile("data/web/workflow_v1_payload.json")
+				request := httptest.NewRequest("POST", "/api/v1/workflow", bytes.NewReader(payload))
+				request.Header.Add("Content-Type", "application/json")
 
-			Expect(response).To(HaveHTTPStatus(fiber.StatusCreated))
-
-			workflow, err := WorkflowRepository.GetWorkflow("test one node failover")
-			Expect(workflow).ToNot(BeNil())
-			Expect(err).To(BeNil())
+				Expect(
+					FiberApp.Test(request, 1),
+				).To(HaveHTTPStatus(fiber.StatusCreated))
+			})
+			It("saves workflow to repository", func() {
+				workflow, err := WorkflowRepository.GetWorkflow("test one node failover")
+				Expect(workflow).ToNot(BeNil())
+				Expect(err).To(BeNil())
+			})
 		})
 	})
 })
@@ -45,11 +49,13 @@ var _ = Describe("Running workflow", Ordered, Label("workflow"), func() {
 	Context("there is workflow", func() {
 		BeforeAll(WorkflowSaved)
 
-		When("wun workflow", func() {
+		When("run workflow", func() {
 			BeforeEach(func(ctx SpecContext) {
 				request := httptest.NewRequest("POST", "/api/v1/workflow/test_workflow/run", nil)
 
-				Expect(FiberApp.Test(request, 1)).To(HaveHTTPStatus(fiber.StatusOK))
+				Expect(
+					FiberApp.Test(request, 1),
+				).To(HaveHTTPStatus(fiber.StatusOK))
 			})
 
 			It("selects resources for action", func() {})

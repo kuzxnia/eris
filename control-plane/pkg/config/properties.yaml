@@ -1,2 +1,9 @@
 server:
   port: 8080
+
+http_client:
+  debug: true
+  retry_count: 3
+  retry_wait_time_ms: 500
+  retry_wait_max_time_ms: 2000 
+  timeout_ms: 1000

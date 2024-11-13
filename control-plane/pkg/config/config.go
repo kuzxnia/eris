@@ -7,11 +7,20 @@ import (
 )
 
 type Config struct {
-	Server ServerConfig `mapstructure:"server"`
+	Server     ServerConfig     `mapstructure:"server"`
+	HttpClient HttpClientConfig `mapstructure:"http_client"`
 }
 
 type ServerConfig struct {
 	Port int `mapstructure:"port"`
+}
+
+type HttpClientConfig struct {
+	Debug              bool `mapstructure:"debug"`
+	RetryCount         int  `mapstructure:"retry_count"`
+	RetryWaitTimeMs    int  `mapstructure:"retry_wait_time_ms"`
+	RetryMaxWaitTimeMs int  `mapstructure:"retry_wait_max_time_ms"`
+	TimeoutMs          int  `mapstructure:"timeout_ms"`
 }
 
 func ProvideConfig() *Config {

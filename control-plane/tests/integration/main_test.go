@@ -5,7 +5,10 @@ import (
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
-	main "github.com/kuzxnia/eris/control-plane/pkg"
+	"github.com/kuzxnia/eris/control-plane/internal/infra"
+	"github.com/kuzxnia/eris/control-plane/pkg/agent"
+	"github.com/kuzxnia/eris/control-plane/pkg/config"
+	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -21,7 +24,11 @@ var (
 var _ = SynchronizedBeforeSuite(func() []byte {
 	// runs *only* on process #1
 	FxApp = fx.New(
-		main.Modules,
+		config.Module,
+		infra.Module,
+		agent.Module,
+		workflow.Module,
+		web.Module,
 		// fx.Replace(mocks(t)),
 		// fx.Invoke(r),
 		fx.Invoke(func(fiberApp *fiber.App, workflowRepository workflow.WorkflowRepository) {

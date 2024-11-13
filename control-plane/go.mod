@@ -5,8 +5,10 @@ go 1.22.0
 toolchain go1.22.1
 
 require (
+	github.com/go-resty/resty/v2 v2.16.0
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/gofiber/swagger v1.1.0
+	github.com/jarcoal/httpmock v1.3.1
 	github.com/onsi/ginkgo/v2 v2.21.0
 	github.com/onsi/gomega v1.35.1
 	github.com/samber/lo v1.47.0

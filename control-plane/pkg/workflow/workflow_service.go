@@ -3,14 +3,13 @@ package workflow
 import (
 	"fmt"
 
-	"github.com/kuzxnia/eris/control-plane/pkg/agent"
 	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
 )
 
 type WorkflowService struct {
-	mapper       *WorkflowMapper
-	repository   WorkflowRepository
-	agentService *agent.AgentService
+	mapper     *WorkflowMapper
+	repository WorkflowRepository
+	// agentService *agent.AgentService
 }
 
 func ProvideWorkflowService(

@@ -1,6 +1,8 @@
 package workflow_test
 
 import (
+	"testing"
+
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
 	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
@@ -12,7 +14,6 @@ import (
 
 var _ = Describe("Creating workflow", Label("workflow"), func() {
 	var workflowService *workflow.WorkflowService
-	// var workflowRepository *mocks.WorkflowRepositoryMock
 	var workflowRepository *mocks.MockWorkflowRepository
 
 	BeforeEach(func(ctx SpecContext) {
@@ -56,3 +57,8 @@ var _ = Describe("Creating workflow", Label("workflow"), func() {
 		})
 	})
 })
+
+func TestWorkflow(t *testing.T) {
+	RegisterFailHandler(Fail)
+	RunSpecs(t, "WorkflowServiceSuite")
+}
