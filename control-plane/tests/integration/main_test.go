@@ -8,7 +8,7 @@ import (
 	"github.com/kuzxnia/eris/control-plane/internal/infra"
 	"github.com/kuzxnia/eris/control-plane/pkg/agent"
 	"github.com/kuzxnia/eris/control-plane/pkg/config"
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web"
+	"github.com/kuzxnia/eris/control-plane/pkg/web"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

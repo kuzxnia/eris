@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+	"github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 	"github.com/kuzxnia/eris/control-plane/tests/unit/mocks"
 	. "github.com/onsi/ginkgo/v2"

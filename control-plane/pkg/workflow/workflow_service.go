@@ -3,7 +3,7 @@ package workflow
 import (
 	"fmt"
 
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+	"github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 )
 
 type WorkflowService struct {

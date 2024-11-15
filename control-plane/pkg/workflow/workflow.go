@@ -35,8 +35,8 @@ type Probe struct {
 type Selector struct {
 	Type                  string
 	PodAffectedPercentage string
-	Label                 *string
+	Label                 string
 	Namespaces            []string
-	ActionName            *string
-	TargetPod             *string
+	ActionName            string
+	TargetPod             string
 }

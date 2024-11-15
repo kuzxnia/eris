@@ -3,7 +3,7 @@ package v1
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/kuzxnia/eris/control-plane/pkg/agent"
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+	"github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 )
 
 type AgentController struct {

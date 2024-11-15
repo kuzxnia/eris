@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+	"github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 )
 
 func ErrorHandler(ctx *fiber.Ctx, err error) error {

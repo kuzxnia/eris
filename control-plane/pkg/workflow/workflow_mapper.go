@@ -1,8 +1,7 @@
 package workflow
 
 import (
-	"github.com/kuzxnia/eris/control-plane/pkg"
-	"github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+	"github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 )
 
 type WorkflowMapper struct{}
@@ -23,7 +22,7 @@ func (m *WorkflowMapper) Map(request *dto.WorkflowRequest) (*Workflow, error) {
 			Name:    action.Name,
 			Type:    action.Type,
 			Timeout: action.Timeout,
-			Selector: &pkg.Selector{
+			Selector: &Selector{
 				Type:                  action.Selector.Type,
 				PodAffectedPercentage: action.Selector.PodAffectedPercentage,
 				Label:                 action.Selector.Label,

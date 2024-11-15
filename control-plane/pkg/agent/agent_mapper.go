@@ -1,6 +1,6 @@
 package agent
 
-import "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/dto"
+import "github.com/kuzxnia/eris/control-plane/pkg/web/dto"
 
 type AgentMapper struct{}
 

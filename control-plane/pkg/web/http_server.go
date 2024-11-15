@@ -10,8 +10,8 @@ import (
 	"github.com/gofiber/swagger"
 	"github.com/kuzxnia/eris/control-plane/pkg/config"
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
-	httpException "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/exception"
-	v1 "github.com/kuzxnia/eris/control-plane/pkg/interfaces/web/v1"
+	httpException "github.com/kuzxnia/eris/control-plane/pkg/web/exception"
+	v1 "github.com/kuzxnia/eris/control-plane/pkg/web/v1"
 	"go.uber.org/fx"
 )
 
