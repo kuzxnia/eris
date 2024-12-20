@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/google/uuid"
 	"github.com/kuzxnia/eris/control-plane/pkg/exception"
 	"github.com/kuzxnia/eris/control-plane/pkg/workflow"
 )
@@ -15,13 +16,19 @@ func ProvideInMemoryWorkflowRepository() *InMemoryWorkflowRepository {
 	}
 }
 
-func (r *InMemoryWorkflowRepository) SaveWorkflow(workflow *workflow.Workflow) error {
-	_, isPresent := r.workflows[workflow.Name]
+func (r *InMemoryWorkflowRepository) CreateWorkflow(workflow *workflow.Workflow) error {
+	workflow.Id = uuid.NewString()
+	_, isPresent := r.workflows[workflow.Id]
 	if isPresent {
 		return exception.ResourceAlreadyExistsError{}
 	}
 
-	r.workflows[workflow.Name] = workflow
+	r.workflows[workflow.Id] = workflow
+	return nil
+}
+
+func (r *InMemoryWorkflowRepository) UpdateWorkflow(workflow *workflow.Workflow) error {
+	r.workflows[workflow.Id] = workflow
 	return nil
 }
 

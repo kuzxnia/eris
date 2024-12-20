@@ -1,10 +1,45 @@
 package workflow
 
+import "time"
+
 type Workflow struct {
+	Id               string // todo: uuid
+	Status           string
+	Actions          []*ActionExecutionContext // different actoin with resources
+	StartTs          time.Time
+	LastTransitionTs time.Time
+	Logs             []*struct {
+		Timestamp time.Time
+		Message   string
+	}
+	Config *WorkflowConfig
+}
+
+type ActionExecutionContext struct {
+	Action           *Action
+	Resources        []*Resource
+	Status           string
+	StartTs          time.Time
+	LastTransitionTs time.Time
+}
+
+type ActionResult struct {
+	Message string
+	Err     error
+}
+
+type Resource struct {
+	Name string
+}
+
+type WorkflowConfig struct {
 	Name     string
 	Contexts Contexts
 	Sources  Sources
 	Actions  []*Action
+	Version  int
+	// todo: handle
+	IsDeleted bool
 }
 
 type Contexts map[string]any

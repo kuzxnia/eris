@@ -10,8 +10,8 @@ func ProvideWorkflowMapper() *WorkflowMapper {
 	return &WorkflowMapper{}
 }
 
-func (m *WorkflowMapper) Map(request *dto.WorkflowRequest) (*Workflow, error) {
-	workflow := Workflow{
+func (m *WorkflowMapper) MapWorkflowConfig(request *dto.WorkflowConfigRequest) (*WorkflowConfig, error) {
+	workflow := WorkflowConfig{
 		Name:     request.Name,
 		Contexts: Contexts(request.Contexts),
 		Sources:  Sources(request.Sources),

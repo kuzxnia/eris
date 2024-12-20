@@ -1,4 +1,4 @@
-package resourceselector
+package resource
 
 import "go.uber.org/fx"
 

@@ -1,4 +1,4 @@
-package resourceselector
+package resource
 
 import (
 	"net/url"

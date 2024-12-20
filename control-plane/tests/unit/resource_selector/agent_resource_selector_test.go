@@ -1,8 +1,8 @@
-package resourceselector_test
+package resource_test
 
 import (
 	"github.com/kuzxnia/eris/control-plane/pkg/agent"
-	resourceselector "github.com/kuzxnia/eris/control-plane/pkg/resource_selector"
+	"github.com/kuzxnia/eris/control-plane/pkg/resource"
 	"github.com/kuzxnia/eris/control-plane/tests/unit/mocks"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -10,7 +10,7 @@ import (
 )
 
 var _ = Describe("Getting resources from agents", Ordered, Label("resource selector"), func() {
-	var agentResourceSelector *resourceselector.AgentResourceSelector
+	var agentResourceSelector *resource.AgentResourceSelector
 	var agentRepositoryMock *mocks.MockAgentRepository
 	var resourceClientMock *mocks.MockResourceClient
 	BeforeEach(func(ctx SpecContext) {
@@ -18,17 +18,17 @@ var _ = Describe("Getting resources from agents", Ordered, Label("resource selec
 
 		agentRepositoryMock = mocks.NewMockAgentRepository(mockCtrl)
 		resourceClientMock = mocks.NewMockResourceClient(mockCtrl)
-		agentResourceSelector = resourceselector.ProvideAgentResourceSelector(
+		agentResourceSelector = resource.ProvideAgentResourceSelector(
 			resourceClientMock, agentRepositoryMock,
 		)
 	})
 
 	When("there are agents", func() {
 		var agents []*agent.Agent
-		var selector *resourceselector.Selector
+		var selector *resource.Selector
 
 		BeforeEach(func(ctx SpecContext) {
-			selector = &resourceselector.Selector{}
+			selector = &resource.Selector{}
 			agents = []*agent.Agent{
 				{URL: "http://agent-1.com"},
 				{URL: "http://agent-2.com"},
@@ -36,9 +36,9 @@ var _ = Describe("Getting resources from agents", Ordered, Label("resource selec
 			agentRepositoryMock.
 				EXPECT().GetAgents().Return(agents, nil)
 			resourceClientMock.
-				EXPECT().GetApiV1Resource("http://agent-1.com", selector).Return([]*resourceselector.Resource{{Name: "resource-from-agent1"}}, nil)
+				EXPECT().GetApiV1Resource("http://agent-1.com", selector).Return([]*resource.Resource{{Name: "resource-from-agent1"}}, nil)
 			resourceClientMock.
-				EXPECT().GetApiV1Resource("http://agent-2.com", selector).Return([]*resourceselector.Resource{{Name: "resource-from-agent2"}}, nil)
+				EXPECT().GetApiV1Resource("http://agent-2.com", selector).Return([]*resource.Resource{{Name: "resource-from-agent2"}}, nil)
 		})
 
 		It("gets resources from agents successfuly", func(ctx SpecContext) {
@@ -50,9 +50,9 @@ var _ = Describe("Getting resources from agents", Ordered, Label("resource selec
 	})
 
 	When("there are no agents", func() {
-		var selector *resourceselector.Selector
+		var selector *resource.Selector
 		BeforeEach(func(ctx SpecContext) {
-			selector = &resourceselector.Selector{}
+			selector = &resource.Selector{}
 			agentRepositoryMock.
 				EXPECT().GetAgents().Return([]*agent.Agent{}, nil)
 		})

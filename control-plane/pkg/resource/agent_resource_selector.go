@@ -1,4 +1,4 @@
-package resourceselector
+package resource
 
 import (
 	"github.com/kuzxnia/eris/control-plane/pkg/agent"
@@ -57,7 +57,7 @@ func (s *AgentResourceSelector) Select(selector *Selector) ([]*Resource, error) 
 		}
 	}
 
-	// limit number of resource by
+  // todo: limit number of resource by
 	// selector.PodAffectedPercentage
 
 	return resources, nil

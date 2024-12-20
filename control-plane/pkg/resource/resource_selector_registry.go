@@ -1,6 +1,10 @@
-package resourceselector
+package resource
 
 import "errors"
+
+// type ResourceSelectorRegistry interface {
+// ResolveResourceSelector(selector *Selector) ([]*Resource, error) 
+// }
 
 type ResourceSelectorRegistry struct {
 	resourceSelectors map[string]ResourceSelector
@@ -21,9 +25,9 @@ func ProvideResourceSelectorRegistry(resourceSelectors []ResourceSelector) *Reso
 	}
 }
 
-func (r *ResourceSelectorRegistry) ResolveResourceSelectorBySelector(selector *Selector) (ResourceSelector, error) {
+func (r *ResourceSelectorRegistry) ResolveResourceSelector(selector *Selector) ([]*Resource, error) {
 	if resourceSelector, ok := r.resourceSelectors[selector.Type]; ok {
-		return resourceSelector, nil
+    return resourceSelector.Select(selector)
 	} else {
 		return nil, errors.New("Resource selector not found for type " + selector.Type)
 	}

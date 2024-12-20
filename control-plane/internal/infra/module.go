@@ -15,4 +15,7 @@ var Module = fx.Options(
 	fx.Provide(
 		fx.Annotate(repository.ProvideInMemoryWorkflowRepository, fx.As(new(workflow.WorkflowRepository))),
 	),
+	fx.Provide(
+		fx.Annotate(repository.ProvideInMemoryWorkflowConfigRepository, fx.As(new(workflow.WorkflowConfigRepository))),
+	),
 )

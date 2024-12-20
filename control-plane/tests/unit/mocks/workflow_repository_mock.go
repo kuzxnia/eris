@@ -40,6 +40,20 @@ func (m *MockWorkflowRepository) EXPECT() *MockWorkflowRepositoryMockRecorder {
 	return m.recorder
 }
 
+// CreateWorkflow mocks base method.
+func (m *MockWorkflowRepository) CreateWorkflow(arg0 *workflow.Workflow) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateWorkflow", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateWorkflow indicates an expected call of CreateWorkflow.
+func (mr *MockWorkflowRepositoryMockRecorder) CreateWorkflow(arg0 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWorkflow", reflect.TypeOf((*MockWorkflowRepository)(nil).CreateWorkflow), arg0)
+}
+
 // GetWorkflow mocks base method.
 func (m *MockWorkflowRepository) GetWorkflow(arg0 string) (*workflow.Workflow, error) {
 	m.ctrl.T.Helper()
@@ -55,16 +69,83 @@ func (mr *MockWorkflowRepositoryMockRecorder) GetWorkflow(arg0 any) *gomock.Call
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflow", reflect.TypeOf((*MockWorkflowRepository)(nil).GetWorkflow), arg0)
 }
 
-// SaveWorkflow mocks base method.
-func (m *MockWorkflowRepository) SaveWorkflow(arg0 *workflow.Workflow) error {
+// UpdateWorkflow mocks base method.
+func (m *MockWorkflowRepository) UpdateWorkflow(arg0 *workflow.Workflow) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SaveWorkflow", arg0)
+	ret := m.ctrl.Call(m, "UpdateWorkflow", arg0)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// SaveWorkflow indicates an expected call of SaveWorkflow.
-func (mr *MockWorkflowRepositoryMockRecorder) SaveWorkflow(arg0 any) *gomock.Call {
+// UpdateWorkflow indicates an expected call of UpdateWorkflow.
+func (mr *MockWorkflowRepositoryMockRecorder) UpdateWorkflow(arg0 any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SaveWorkflow", reflect.TypeOf((*MockWorkflowRepository)(nil).SaveWorkflow), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWorkflow", reflect.TypeOf((*MockWorkflowRepository)(nil).UpdateWorkflow), arg0)
+}
+
+// MockWorkflowConfigRepository is a mock of WorkflowConfigRepository interface.
+type MockWorkflowConfigRepository struct {
+	ctrl     *gomock.Controller
+	recorder *MockWorkflowConfigRepositoryMockRecorder
+	isgomock struct{}
+}
+
+// MockWorkflowConfigRepositoryMockRecorder is the mock recorder for MockWorkflowConfigRepository.
+type MockWorkflowConfigRepositoryMockRecorder struct {
+	mock *MockWorkflowConfigRepository
+}
+
+// NewMockWorkflowConfigRepository creates a new mock instance.
+func NewMockWorkflowConfigRepository(ctrl *gomock.Controller) *MockWorkflowConfigRepository {
+	mock := &MockWorkflowConfigRepository{ctrl: ctrl}
+	mock.recorder = &MockWorkflowConfigRepositoryMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockWorkflowConfigRepository) EXPECT() *MockWorkflowConfigRepositoryMockRecorder {
+	return m.recorder
+}
+
+// CreateWorkflowConfig mocks base method.
+func (m *MockWorkflowConfigRepository) CreateWorkflowConfig(arg0 *workflow.WorkflowConfig) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateWorkflowConfig", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateWorkflowConfig indicates an expected call of CreateWorkflowConfig.
+func (mr *MockWorkflowConfigRepositoryMockRecorder) CreateWorkflowConfig(arg0 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateWorkflowConfig", reflect.TypeOf((*MockWorkflowConfigRepository)(nil).CreateWorkflowConfig), arg0)
+}
+
+// GetWorkflowConfig mocks base method.
+func (m *MockWorkflowConfigRepository) GetWorkflowConfig(arg0 string) (*workflow.WorkflowConfig, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWorkflowConfig", arg0)
+	ret0, _ := ret[0].(*workflow.WorkflowConfig)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWorkflowConfig indicates an expected call of GetWorkflowConfig.
+func (mr *MockWorkflowConfigRepositoryMockRecorder) GetWorkflowConfig(arg0 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWorkflowConfig", reflect.TypeOf((*MockWorkflowConfigRepository)(nil).GetWorkflowConfig), arg0)
+}
+
+// UpdateWorkflowConfig mocks base method.
+func (m *MockWorkflowConfigRepository) UpdateWorkflowConfig(arg0 *workflow.WorkflowConfig) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateWorkflowConfig", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateWorkflowConfig indicates an expected call of UpdateWorkflowConfig.
+func (mr *MockWorkflowConfigRepositoryMockRecorder) UpdateWorkflowConfig(arg0 any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWorkflowConfig", reflect.TypeOf((*MockWorkflowConfigRepository)(nil).UpdateWorkflowConfig), arg0)
 }

@@ -19,13 +19,13 @@ func ProvideAgentService(mapper *AgentMapper, repository AgentRepository) *Agent
 	}
 }
 
-func (s *AgentService) CreateAgent(agentRequest dto.AgentRequest) error {
-	agent, _ := s.mapper.Map(&agentRequest)
-	return s.repository.SaveAgent(agent)
-}
-
 func (s *AgentService) GetAgents() ([]*Agent, error) {
 	// todo: from repository map
 	// repository return entity
 	return s.repository.GetAgents()
+}
+
+func (s *AgentService) CreateAgent(agentRequest dto.AgentRequest) error {
+	agent, _ := s.mapper.Map(&agentRequest)
+	return s.repository.SaveAgent(agent)
 }
